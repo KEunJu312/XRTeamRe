@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.XR;
 using UnityEngine.InputSystem;
 
 
@@ -9,7 +10,8 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed;
-    public InputActionProperty nextLineAction;
+    public InputActionProperty triggerAction;
+
 
     private int index;
 
@@ -22,7 +24,7 @@ public class Dialogue : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (triggerAction.action.WasPressedThisFrame())
         {
             if (textComponent.text == lines[index])
             {
