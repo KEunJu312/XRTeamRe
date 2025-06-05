@@ -12,16 +12,14 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     public InputActionProperty triggerAction;
 
-
     private int index;
 
     void Start()
     {
         textComponent.text = string.Empty;
-        StartDialogue();
+        // StartDialogue(); // 처음엔 비활성화 상태로 두고, XR 상호작용으로 켜는 게 일반적
     }
 
-    
     void Update()
     {
         if (triggerAction.action.WasPressedThisFrame())
@@ -38,12 +36,19 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+    public void ShowDialogue()
+    {
+        gameObject.SetActive(true);
+        StartDialogue();
+    }
+
     void StartDialogue()
     {
         index = 0;
+        textComponent.text = string.Empty;
         StartCoroutine(TypeLine());
-        
     }
+
     IEnumerator TypeLine()
     {
         foreach (char c in lines[index].ToCharArray())
@@ -55,17 +60,16 @@ public class Dialogue : MonoBehaviour
 
     void NextLine()
     {
-
         if (index < lines.Length - 1)
         {
             index++;
-            textComponent.text += string.Empty;
+            textComponent.text = string.Empty;
             StartCoroutine(TypeLine());
         }
         else
-
         {
             gameObject.SetActive(false);
         }
     }
 }
+
