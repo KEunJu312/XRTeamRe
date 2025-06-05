@@ -9,8 +9,8 @@ public class FlashbackTriggerWithHeartMiniGame : MonoBehaviour
 
     private bool isFlashingBack = false;
     private bool isEscapeConditionMet = false;
+    private bool hasTriggered = false; // 트리거가 한 번만 작동하도록
 
-    // 씬 시작 시 하트 미니게임 UI를 자동으로 비활성화
     void Start()
     {
         if (heartBeatMiniGameUI != null)
@@ -19,8 +19,9 @@ public class FlashbackTriggerWithHeartMiniGame : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isFlashingBack)
+        if (other.CompareTag("Player") && !isFlashingBack && !hasTriggered)
         {
+            hasTriggered = true; // 트리거가 한 번만 작동
             StartCoroutine(FlashbackSequence());
         }
     }
@@ -28,7 +29,7 @@ public class FlashbackTriggerWithHeartMiniGame : MonoBehaviour
     private IEnumerator FlashbackSequence()
     {
         isFlashingBack = true;
-        isEscapeConditionMet = false; // 반복 사용 시를 위한 초기화
+        isEscapeConditionMet = false;
 
         Debug.Log("Flashback 시작");
 
@@ -52,9 +53,9 @@ public class FlashbackTriggerWithHeartMiniGame : MonoBehaviour
         Debug.Log("Flashback 탈출 성공!");
 
         isFlashingBack = false;
+        Destroy(gameObject); // 미니게임 종료 후 트리거 오브젝트 삭제
     }
 
-    // 외부에서 이 함수를 호출해서 탈출 조건을 만족시킬 수 있음
     public void SetEscapeConditionMet()
     {
         isEscapeConditionMet = true;

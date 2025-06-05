@@ -94,19 +94,19 @@ public class HeartBeatMiniGameXR : MonoBehaviour
                 {
                     OnHeartSuccess(heart);
                     Debug.Log("왼쪽 하트 누르기 성공");
-                    break; // 한 번에 한 하트만 처리
+                    break;
                 }
                 else if (!heart.isLeft && rightDown)
                 {
                     OnHeartSuccess(heart);
                     Debug.Log("오른쪽 하트 누르기 성공");
-                    break; // 한 번에 한 하트만 처리
+                    break;
                 }
                 else if (leftDown || rightDown)
                 {
                     OnHeartFail(heart);
                     Debug.Log("하트 누르기 실패");
-                    break; // 한 번에 한 하트만 처리
+                    break;
                 }
             }
         }
@@ -121,7 +121,7 @@ public class HeartBeatMiniGameXR : MonoBehaviour
 
         if (currentSuccess >= successNeeded)
         {
-            flashbackTrigger.SetEscapeConditionMet();
+            flashbackTrigger.SetEscapeConditionMet(); // 5번 성공 시 탈출 조건 충족
         }
     }
 
