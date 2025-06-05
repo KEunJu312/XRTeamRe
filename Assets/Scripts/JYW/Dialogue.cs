@@ -1,33 +1,43 @@
 using UnityEngine;
 using TMPro;
-using System.Collections;
-using UnityEngine.XR;
 using UnityEngine.InputSystem;
-
+using System.Collections;
+using System;
 
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string[] lines;
-    public float textSpeed;
+    public float textSpeed = 0.05f;
     public InputActionProperty triggerAction;
 
     private int index;
 
-    void Start()
+    public void SetLines(string[] newLines)
     {
+        lines = newLines;
+    }
+
+    internal void SetLines(object lines)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ShowDialogue()
+    {
+        gameObject.SetActive(true);
+        index = 0;
         textComponent.text = string.Empty;
-        // StartDialogue(); // 처음엔 비활성화 상태로 두고, XR 상호작용으로 켜는 게 일반적
+        StartCoroutine(TypeLine());
     }
 
     void Update()
     {
+        if (!gameObject.activeSelf) return;
         if (triggerAction.action.WasPressedThisFrame())
         {
             if (textComponent.text == lines[index])
-            {
                 NextLine();
-            }
             else
             {
                 StopAllCoroutines();
@@ -36,22 +46,9 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    public void ShowDialogue()
-    {
-        gameObject.SetActive(true);
-        StartDialogue();
-    }
-
-    void StartDialogue()
-    {
-        index = 0;
-        textComponent.text = string.Empty;
-        StartCoroutine(TypeLine());
-    }
-
     IEnumerator TypeLine()
     {
-        foreach (char c in lines[index].ToCharArray())
+        foreach (char c in lines[index])
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
@@ -72,4 +69,3 @@ public class Dialogue : MonoBehaviour
         }
     }
 }
-

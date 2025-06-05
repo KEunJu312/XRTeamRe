@@ -1,16 +1,17 @@
+using DialogueEditor;
 using UnityEngine;
 
 public class DialogueStarter : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public NPCConversation conversationData;
 
-    // Update is called once per frame
-    void Update()
+    public void StartDialogue()
     {
-        
+        if (conversationData != null)
+        {
+            ConversationManager.Instance.StartConversation(conversationData);
+        }
     }
 }
+
+
