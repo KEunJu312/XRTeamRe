@@ -82,15 +82,18 @@ public class HeartBeatMiniGameXR : MonoBehaviour
 
                 if (heart.isLeft && leftPressed)
                 {
-                    OnHeartSuccess(heart);
+                    OnHeartSuccess(heart); 
+                    Debug.Log("왼쪽 하트 누르기 성공");
                 }
                 else if (!heart.isLeft && rightPressed)
                 {
                     OnHeartSuccess(heart);
+                    Debug.Log("오른쪽 하트 누르기 성공");
                 }
                 else if (leftPressed || rightPressed)
                 {
                     OnHeartFail(heart);
+                    Debug.Log("하트 누르기 실패");
                 }
             }
         }
