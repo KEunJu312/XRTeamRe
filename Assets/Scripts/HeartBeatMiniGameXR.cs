@@ -22,6 +22,10 @@ public class HeartBeatMiniGameXR : MonoBehaviour
 
     private List<MovingHeart> activeHearts = new List<MovingHeart>();
 
+    // 버튼 Down 판정용 변수
+    private bool prevLeftPressed = false;
+    private bool prevRightPressed = false;
+
     void OnEnable()
     {
         StartCoroutine(SpawnHearts());
@@ -64,6 +68,21 @@ public class HeartBeatMiniGameXR : MonoBehaviour
 
     void Update()
     {
+        bool leftPressed = false;
+        bool rightPressed = false;
+
+        InputDevice leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+        InputDevice rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+
+        leftHand.TryGetFeatureValue(CommonUsages.primaryButton, out leftPressed);
+        rightHand.TryGetFeatureValue(CommonUsages.primaryButton, out rightPressed);
+
+        bool leftDown = leftPressed && !prevLeftPressed;
+        bool rightDown = rightPressed && !prevRightPressed;
+
+        prevLeftPressed = leftPressed;
+        prevRightPressed = rightPressed;
+
         for (int i = activeHearts.Count - 1; i >= 0; i--)
         {
             MovingHeart heart = activeHearts[i];
@@ -71,29 +90,23 @@ public class HeartBeatMiniGameXR : MonoBehaviour
 
             if (heart.IsInPerfectRange(centerHeart.anchoredPosition, perfectRange))
             {
-                bool leftPressed = false;
-                bool rightPressed = false;
-
-                InputDevice leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-                InputDevice rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
-
-                leftHand.TryGetFeatureValue(CommonUsages.primaryButton, out leftPressed);
-                rightHand.TryGetFeatureValue(CommonUsages.primaryButton, out rightPressed);
-
-                if (heart.isLeft && leftPressed)
+                if (heart.isLeft && leftDown)
                 {
-                    OnHeartSuccess(heart); 
+                    OnHeartSuccess(heart);
                     Debug.Log("왼쪽 하트 누르기 성공");
+                    break; // 한 번에 한 하트만 처리
                 }
-                else if (!heart.isLeft && rightPressed)
+                else if (!heart.isLeft && rightDown)
                 {
                     OnHeartSuccess(heart);
                     Debug.Log("오른쪽 하트 누르기 성공");
+                    break; // 한 번에 한 하트만 처리
                 }
-                else if (leftPressed || rightPressed)
+                else if (leftDown || rightDown)
                 {
                     OnHeartFail(heart);
                     Debug.Log("하트 누르기 실패");
+                    break; // 한 번에 한 하트만 처리
                 }
             }
         }
