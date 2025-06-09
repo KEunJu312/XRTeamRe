@@ -5,7 +5,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AITarget : MonoBehaviour
 {
-    public float FollowDistance = 2.0f;
+    public float FollowDistance = 10.0f;
     public Transform target;
 
     private NavMeshAgent agent;
