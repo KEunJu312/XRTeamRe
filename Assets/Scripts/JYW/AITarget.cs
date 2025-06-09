@@ -29,12 +29,17 @@ public class AITarget : MonoBehaviour
         if (distance > FollowDistance)
         { 
             animator.SetBool("isMoving", true);
-            
-            agent.destination = target.position;
+
+            // agent.destination = target.position;
+            Vector3 direction = (agent.transform.position - target.position).normalized;
+            Vector3 desiredPosition = target.position + direction * FollowDistance;
+
+            agent.SetDestination(desiredPosition);
         }
         else
         {
             animator.SetBool("isMoving", false);
+            agent.ResetPath();
         }
     }
 
