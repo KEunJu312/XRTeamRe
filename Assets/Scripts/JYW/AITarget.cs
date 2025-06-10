@@ -64,7 +64,7 @@ public class AITarget : MonoBehaviour
     void Update()
     {
         Transform currentTarget = isFollowingPlayer ? playerTarget : mazeTarget;
-        Debug.Log("«ˆ¿Á ≈∏∞Ÿ: " + currentTarget.name);
+
         float distance = Vector3.Distance(agent.transform.position, currentTarget.position);
 
         if (distance > FollowDistance)
@@ -83,7 +83,7 @@ public class AITarget : MonoBehaviour
     public void FollowMazeTarget()
     {
         isFollowingPlayer = false;
-        Debug.Log("FollowMazeTarget »£√‚µ ");
+        
 
     }
 
