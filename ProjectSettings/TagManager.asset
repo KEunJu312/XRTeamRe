@@ -8,6 +8,8 @@ TagManager:
   - Trap
   - QDSUIBackplateGradient
   - Rabbit
+  - Door
+  - Key
   layers:
   - Default
   - TransparentFX
