@@ -1,20 +1,22 @@
 using UnityEngine;
-using DoorScript; // 네임스페이스 참조 추가
+using UnityEngine.Video;
 
 public class KeyDestruction : MonoBehaviour
 {
+    public VideoPlayer videoPlayer; // 하이어라키의 VideoPlayer 오브젝트를 여기에 할당
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Door"))
         {
-            // Door 컴포넌트 가져오기
-            Door door = other.GetComponent<Door>();
-            if (door != null)
+            // 영상 재생
+            if (videoPlayer != null)
             {
-                door.OpenDoor(); // 문 열기 메서드 호출
+                videoPlayer.Play();
             }
             Destroy(gameObject); // 키 삭제
         }
     }
 }
+
 

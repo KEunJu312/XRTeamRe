@@ -1,21 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; // 반드시 추가
 
 public class FadeScreen : MonoBehaviour
 {
     public bool fadeOnStart = true;
     public float fadeDuration = 2;
-    public Color fadeColor;
+    public Color fadeColor = Color.black;
     public AnimationCurve fadeCurve;
-    public string colorPropertyName = "_Color";
-    private Renderer rend;
 
-    // Start is called before the first frame update
+    private Image image; // 또는 public RawImage rawImage;
+    private bool isFading = false;
+
     void Start()
     {
-        rend = GetComponent<Renderer>();
-        rend.enabled = false;
+        image = GetComponent<Image>(); // Image 컴포넌트 사용 시
+        // 또는 rawImage = GetComponent<RawImage>(); // RawImage 컴포넌트 사용 시
+
+        if (image != null) // 또는 rawImage != null
+            image.enabled = false; // 초기 상태 숨김
 
         if (fadeOnStart)
             FadeIn();
@@ -25,7 +28,7 @@ public class FadeScreen : MonoBehaviour
     {
         Fade(1, 0);
     }
-    
+
     public void FadeOut()
     {
         Fade(0, 1);
@@ -33,30 +36,38 @@ public class FadeScreen : MonoBehaviour
 
     public void Fade(float alphaIn, float alphaOut)
     {
-        StartCoroutine(FadeRoutine(alphaIn,alphaOut));
+        if (!isFading)
+            StartCoroutine(FadeRoutine(alphaIn, alphaOut));
     }
 
-    public IEnumerator FadeRoutine(float alphaIn,float alphaOut)
+    public IEnumerator FadeRoutine(float alphaIn, float alphaOut)
     {
-        rend.enabled = true;
+        isFading = true;
+
+        if (image != null) // 또는 rawImage != null
+        {
+            image.enabled = true;
+            image.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, alphaIn);
+        }
 
         float timer = 0;
-        while(timer <= fadeDuration)
+        while (timer <= fadeDuration)
         {
-            Color newColor = fadeColor;
-            newColor.a = Mathf.Lerp(alphaIn, alphaOut, fadeCurve.Evaluate(timer / fadeDuration));
-
-            rend.material.SetColor(colorPropertyName, newColor);
+            float alpha = Mathf.Lerp(alphaIn, alphaOut, fadeCurve.Evaluate(timer / fadeDuration));
+            if (image != null) // 또는 rawImage != null
+                image.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, alpha);
 
             timer += Time.deltaTime;
             yield return null;
         }
 
-        Color newColor2 = fadeColor;
-        newColor2.a = alphaOut;
-        rend.material.SetColor(colorPropertyName, newColor2);
+        if (image != null) // 또는 rawImage != null
+        {
+            image.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, alphaOut);
+            if (alphaOut == 0)
+                image.enabled = false; // 페이드아웃 완료 시 숨김
+        }
 
-        if(alphaOut == 0)
-            rend.enabled = false;
+        isFading = false;
     }
 }

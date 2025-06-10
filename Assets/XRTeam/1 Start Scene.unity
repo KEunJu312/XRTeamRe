@@ -2018,7 +2018,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  colorPropertyName: _Color
 --- !u!114 &740676064
 MonoBehaviour:
   m_ObjectHideFlags: 0
