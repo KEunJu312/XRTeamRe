@@ -3,18 +3,7 @@ using UnityEngine;
 public class GiftFailTrigger : MonoBehaviour
 {
     public AudioClip collectSound; // 재생할 효과음
-
-    private AudioSource audioSource;
-
-    void Start()
-    {
-        // AudioSource 자동 추가 또는 참조
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
-    }
+    public AudioSource audioSource; // 인스펙터에서 Audio Source를 드래그 앤 드롭으로 할당
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,9 +11,10 @@ public class GiftFailTrigger : MonoBehaviour
         {
             Debug.Log("실패 상자입니다.");
             PlaySound();
-            Destroy(gameObject); // 선물 오브젝트 제거
+            Destroy(gameObject, collectSound.length); // 소리 길이만큼 딜레이 후 삭제
         }
     }
+
 
     void PlaySound()
     {
