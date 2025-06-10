@@ -3,7 +3,7 @@ using UnityEngine;
 public class TeleportOnCollision : MonoBehaviour
 {
     // 텔레포트 위치를 지정할 변수 (원하는 위치를 설정)
-    public Vector3 teleportPosition = new Vector3(51f, 0f, 168f);
+    public Vector3 teleportPosition = new Vector3(351f, 5f, 468f);
 
     // 오브젝트가 큐브의 트리거에 닿으면 자동으로 실행되는 함수
     void OnTriggerEnter(Collider other)
