@@ -9,8 +9,8 @@ MonoImporter:
   - centerHeart: {instanceID: 0}
   - movingHeartPrefab: {instanceID: 0}
   - audioSource: {instanceID: 0}
-  - successClip: {fileID: 8300000, guid: 63b803dabb09fd541a162667316a7e87, type: 3}
-  - failClip: {fileID: 8300000, guid: d7463b072a595394b9a36071cfb970e2, type: 3}
+  - successClip: {instanceID: 0}
+  - failClip: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
