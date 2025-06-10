@@ -42,7 +42,7 @@
 //            agent.ResetPath();
 //        }
 //    }
-//}
+}
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -84,7 +84,7 @@ public class AITarget : MonoBehaviour
     {
         isFollowingPlayer = false;
         Debug.Log("FollowMazeTarget 호출됨");
-        
+
     }
 
     // 충돌 처리

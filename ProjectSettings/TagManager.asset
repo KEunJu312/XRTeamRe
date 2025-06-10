@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Teleport
   - Trap
+  - QDSUIBackplateGradient
+  - Rabbit
   layers:
   - Default
   - TransparentFX

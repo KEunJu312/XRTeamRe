@@ -9,7 +9,7 @@ public class TeleportOnCollision : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // 충돌한 오브젝트의 태그가 "Player"인 경우에만 실행
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Rabbit"))
         {
             // 플레이어를 지정된 위치로 이동
             other.transform.position = teleportPosition;
