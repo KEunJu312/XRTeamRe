@@ -1,18 +1,29 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TeleportOnCollision : MonoBehaviour
 {
     // 텔레포트 위치를 지정할 변수 (원하는 위치를 설정)
     public Vector3 teleportPosition = new Vector3(351f, 5f, 468f);
 
-    // 오브젝트가 큐브의 트리거에 닿으면 자동으로 실행되는 함수
     void OnTriggerEnter(Collider other)
     {
-        // 충돌한 오브젝트의 태그가 "Player"인 경우에만 실행
-        if (other.CompareTag("Player") || other.CompareTag("Rabbit"))
+        // NavMeshAgent가 붙어있는 오브젝트(예: Rabbit, Player)만 처리
+        NavMeshAgent agent = other.GetComponent<NavMeshAgent>();
+        if (agent != null)
         {
-            // 플레이어를 지정된 위치로 이동
+            // NavMesh 위에서만 Warp 가능
+            bool success = agent.Warp(teleportPosition);
+            if (!success)
+            {
+                Debug.LogWarning($"{other.name}의 Warp 실패: 지정 위치가 NavMesh 위에 없습니다.");
+            }
+        }
+        else
+        {
+            // NavMeshAgent 없는 경우엔 Transform.position 사용 (예외적 상황)
             other.transform.position = teleportPosition;
         }
     }
 }
+
