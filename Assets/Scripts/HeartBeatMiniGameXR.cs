@@ -26,6 +26,11 @@ public class HeartBeatMiniGameXR : MonoBehaviour
     private bool prevLeftPressed = false;
     private bool prevRightPressed = false;
 
+    // 오디오 관련 변수 추가
+    public AudioSource audioSource;
+    public AudioClip successClip;
+    public AudioClip failClip;
+
     void OnEnable()
     {
         StartCoroutine(SpawnHearts());
@@ -119,6 +124,12 @@ public class HeartBeatMiniGameXR : MonoBehaviour
         activeHearts.Remove(heart);
         Destroy(heart.gameObject);
 
+        // 성공 시 오디오 재생
+        if (audioSource != null && successClip != null)
+        {
+            audioSource.PlayOneShot(successClip);
+        }
+
         if (currentSuccess >= successNeeded)
         {
             flashbackTrigger.SetEscapeConditionMet(); // 5번 성공 시 탈출 조건 충족
@@ -132,5 +143,13 @@ public class HeartBeatMiniGameXR : MonoBehaviour
 
         activeHearts.Remove(heart);
         Destroy(heart.gameObject);
+
+        // 실패 시 오디오 재생
+        if (audioSource != null && failClip != null)
+        {
+            audioSource.PlayOneShot(failClip);
+        }
     }
 }
+
+
