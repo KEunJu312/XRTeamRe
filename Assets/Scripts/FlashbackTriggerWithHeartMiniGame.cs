@@ -11,14 +11,13 @@ public class FlashbackTriggerWithHeartMiniGame : MonoBehaviour
     private bool isEscapeConditionMet = false;
     private bool hasTriggered = false;
 
-    private AudioSource heartbeatAudioSource; // 오디오소스 참조 변수
+    private AudioSource heartbeatAudioSource;
 
     void Start()
     {
         if (heartBeatMiniGameUI != null)
             heartBeatMiniGameUI.SetActive(false);
 
-        // AudioPlayer 오브젝트에서 AudioSource 가져오기
         GameObject audioPlayer = GameObject.Find("AudioPlayer");
         if (audioPlayer != null)
         {
@@ -27,6 +26,13 @@ public class FlashbackTriggerWithHeartMiniGame : MonoBehaviour
         else
         {
             Debug.LogWarning("AudioPlayer 오브젝트를 찾을 수 없습니다.");
+        }
+
+        // 시작 시 post-processing 비활성화
+        if (postProcessingVolume != null)
+        {
+            postProcessingVolume.weight = 0f;
+            postProcessingVolume.enabled = false;
         }
     }
 
@@ -52,8 +58,12 @@ public class FlashbackTriggerWithHeartMiniGame : MonoBehaviour
             heartbeatAudioSource.Play();
         }
 
+        // 후처리 효과 적용
         if (postProcessingVolume != null)
+        {
+            postProcessingVolume.enabled = true;
             postProcessingVolume.weight = 1f;
+        }
 
         if (heartBeatMiniGameUI != null)
             heartBeatMiniGameUI.SetActive(true);
@@ -69,8 +79,12 @@ public class FlashbackTriggerWithHeartMiniGame : MonoBehaviour
             heartbeatAudioSource.Stop();
         }
 
+        // 후처리 효과 해제
         if (postProcessingVolume != null)
+        {
             postProcessingVolume.weight = 0f;
+            postProcessingVolume.enabled = false;
+        }
 
         if (heartBeatMiniGameUI != null)
             heartBeatMiniGameUI.SetActive(false);
