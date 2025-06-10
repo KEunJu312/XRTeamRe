@@ -64,6 +64,7 @@ public class AITarget : MonoBehaviour
     void Update()
     {
         Transform currentTarget = isFollowingPlayer ? playerTarget : mazeTarget;
+        Debug.Log("ÇöÀç Å¸°Ù: " + currentTarget.name);
         float distance = Vector3.Distance(agent.transform.position, currentTarget.position);
 
         if (distance > FollowDistance)
