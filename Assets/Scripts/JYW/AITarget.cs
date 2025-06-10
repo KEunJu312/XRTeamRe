@@ -82,6 +82,8 @@ public class AITarget : MonoBehaviour
     public void FollowMazeTarget()
     {
         isFollowingPlayer = false;
+        Debug.Log("FollowMazeTarget 호출됨");
+        
     }
 
     // 충돌 처리
