@@ -20,6 +20,7 @@ public class GiftFailTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("실패 상자입니다.");
             PlaySound();
             Destroy(gameObject); // 선물 오브젝트 제거
         }

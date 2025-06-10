@@ -21,6 +21,7 @@ public class GiftSuccenssTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("열쇠 상자입니다.");
             DropKey();
             PlaySound();
             Destroy(gameObject); // 선물 제거
