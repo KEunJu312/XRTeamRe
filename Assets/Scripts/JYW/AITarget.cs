@@ -10,17 +10,27 @@ public class AITarget : MonoBehaviour
     private Animator animator;
     private bool isFollowingPlayer = true;
     private Transform currentTarget;
+    private int cnt = 0;
+    private bool returnedToPlayer = false; // 중복 전환 방지
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        agent.stoppingDistance = FollowDistance; // NavMeshAgent의 정지 거리 설정[1][3][5]
+        agent.stoppingDistance = FollowDistance;
         currentTarget = playerTarget;
     }
 
     void Update()
     {
+        // cnt가 1이 되면 다시 플레이어를 타깃으로 전환
+        if (cnt == 1 && !returnedToPlayer)
+        {
+            isFollowingPlayer = true;
+            agent.SetDestination(playerTarget.position);
+            returnedToPlayer = true; // 한 번만 전환
+        }
+
         // 타겟 갱신
         currentTarget = isFollowingPlayer ? playerTarget : mazeTarget;
 
@@ -47,7 +57,8 @@ public class AITarget : MonoBehaviour
     public void FollowMazeTarget()
     {
         isFollowingPlayer = false;
-        // 타겟이 바뀌었으니 즉시 목적지 갱신
+        cnt++;
+        returnedToPlayer = false; // 다시 전환 허용
         if (mazeTarget != null)
         {
             agent.SetDestination(mazeTarget.position);
