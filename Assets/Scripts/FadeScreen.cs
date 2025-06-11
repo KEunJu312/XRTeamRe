@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI; // 반드시 추가
+using UnityEngine.UI;
 
 public class FadeScreen : MonoBehaviour
 {
@@ -9,16 +9,15 @@ public class FadeScreen : MonoBehaviour
     public Color fadeColor = Color.black;
     public AnimationCurve fadeCurve;
 
-    private Image image; // 또는 public RawImage rawImage;
+    private Image image;
     private bool isFading = false;
 
     void Start()
     {
-        image = GetComponent<Image>(); // Image 컴포넌트 사용 시
-        // 또는 rawImage = GetComponent<RawImage>(); // RawImage 컴포넌트 사용 시
-
-        if (image != null) // 또는 rawImage != null
-            image.enabled = false; // 초기 상태 숨김
+        image = GetComponent<Image>();
+    
+        if (image != null) 
+            image.enabled = false;
 
         if (fadeOnStart)
             FadeIn();
@@ -44,7 +43,7 @@ public class FadeScreen : MonoBehaviour
     {
         isFading = true;
 
-        if (image != null) // 또는 rawImage != null
+        if (image != null)
         {
             image.enabled = true;
             image.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, alphaIn);
@@ -54,18 +53,18 @@ public class FadeScreen : MonoBehaviour
         while (timer <= fadeDuration)
         {
             float alpha = Mathf.Lerp(alphaIn, alphaOut, fadeCurve.Evaluate(timer / fadeDuration));
-            if (image != null) // 또는 rawImage != null
+            if (image != null)
                 image.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, alpha);
 
             timer += Time.deltaTime;
             yield return null;
         }
 
-        if (image != null) // 또는 rawImage != null
+        if (image != null)
         {
             image.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, alphaOut);
             if (alphaOut == 0)
-                image.enabled = false; // 페이드아웃 완료 시 숨김
+                image.enabled = false;
         }
 
         isFading = false;
