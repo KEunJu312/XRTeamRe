@@ -22,11 +22,11 @@ public class HeartBeatMiniGameXR : MonoBehaviour
 
     private List<MovingHeart> activeHearts = new List<MovingHeart>();
 
-    // ¹öÆ° Down ÆÇÁ¤¿ë º¯¼ö
+    // ë²„íŠ¼ Down íŒì •ìš© ë³€ìˆ˜
     private bool prevLeftPressed = false;
     private bool prevRightPressed = false;
 
-    // ¿Àµğ¿À °ü·Ã º¯¼ö Ãß°¡
+    // ì˜¤ë””ì˜¤ ê´€ë ¨
     public AudioSource audioSource;
     public AudioClip successClip;
     public AudioClip failClip;
@@ -98,19 +98,19 @@ public class HeartBeatMiniGameXR : MonoBehaviour
                 if (heart.isLeft && leftDown)
                 {
                     OnHeartSuccess(heart);
-                    Debug.Log("¿ŞÂÊ ÇÏÆ® ´©¸£±â ¼º°ø");
+                    Debug.Log("ì™¼ìª½ í•˜íŠ¸ ëˆ„ë¥´ê¸° ì„±ê³µ");
                     break;
                 }
                 else if (!heart.isLeft && rightDown)
                 {
                     OnHeartSuccess(heart);
-                    Debug.Log("¿À¸¥ÂÊ ÇÏÆ® ´©¸£±â ¼º°ø");
+                    Debug.Log("ì˜¤ë¥¸ìª½ í•˜íŠ¸ ëˆ„ë¥´ê¸° ì„±ê³µ");
                     break;
                 }
                 else if (leftDown || rightDown)
                 {
                     OnHeartFail(heart);
-                    Debug.Log("ÇÏÆ® ´©¸£±â ½ÇÆĞ");
+                    Debug.Log("í•˜íŠ¸ ëˆ„ë¥´ê¸° ì‹¤íŒ¨");
                     break;
                 }
             }
@@ -124,7 +124,7 @@ public class HeartBeatMiniGameXR : MonoBehaviour
         activeHearts.Remove(heart);
         Destroy(heart.gameObject);
 
-        // ¼º°ø ½Ã ¿Àµğ¿À Àç»ı
+        // ì„±ê³µ ì‹œ ì˜¤ë””ì˜¤ ì¬ìƒ
         if (audioSource != null && successClip != null)
         {
             audioSource.PlayOneShot(successClip);
@@ -132,7 +132,7 @@ public class HeartBeatMiniGameXR : MonoBehaviour
 
         if (currentSuccess >= successNeeded)
         {
-            flashbackTrigger.SetEscapeConditionMet(); // 5¹ø ¼º°ø ½Ã Å»Ãâ Á¶°Ç ÃæÁ·
+            flashbackTrigger.SetEscapeConditionMet(); // 5ë²ˆ ì„±ê³µ ì‹œ íƒˆì¶œ ì¡°ê±´ ì¶©ì¡±
         }
     }
 
@@ -144,7 +144,7 @@ public class HeartBeatMiniGameXR : MonoBehaviour
         activeHearts.Remove(heart);
         Destroy(heart.gameObject);
 
-        // ½ÇÆĞ ½Ã ¿Àµğ¿À Àç»ı
+        // ì‹¤íŒ¨ ì‹œ ì˜¤ë””ì˜¤ ì¬ìƒ
         if (audioSource != null && failClip != null)
         {
             audioSource.PlayOneShot(failClip);
