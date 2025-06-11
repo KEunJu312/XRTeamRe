@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class LookAtPlayer : MonoBehaviour
 {
-    // ÇÃ·¹ÀÌ¾î Ä«¸Ş¶ó(Çìµå¼Â) TransformÀ» Inspector¿¡¼­ ÇÒ´çÇÏ°Å³ª ÀÚµ¿À¸·Î Ã£À½
     public Transform playerCamera;
 
     void Start()
     {
-        // playerCamera°¡ ºñ¾î ÀÖÀ¸¸é Main Camera¸¦ ÀÚµ¿À¸·Î ÇÒ´ç
         if (playerCamera == null && Camera.main != null)
         {
             playerCamera = Camera.main.transform;
@@ -18,12 +16,10 @@ public class LookAtPlayer : MonoBehaviour
     {
         if (playerCamera != null)
         {
-            // Äµ¹ö½ºÀÇ ¾Õ¸é(+Z)ÀÌ ÇÃ·¹ÀÌ¾î(Ä«¸Ş¶ó)¸¦ ¹Ù¶óº¸°Ô È¸Àü
-            // (µÚÁıÈû Çö»ó ¹æÁö)
+            // ìº”ë²„ìŠ¤ì˜ ì•ë©´ì´ í”Œë ˆì´ì–´ë¥¼ ë°”ë¼ë³´ê²Œ íšŒì „
             Vector3 direction = (transform.position - playerCamera.position).normalized;
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 
-            // ¸¸¾à YÃà¸¸ È¸Àü½ÃÅ°°í ½ÍÀ¸¸é ¾Æ·¡ ÄÚµå·Î ±³Ã¼:
             // Vector3 targetPosition = playerCamera.position;
             // targetPosition.y = transform.position.y;
             // Vector3 direction = (transform.position - targetPosition).normalized;
