@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class KeySpinning : MonoBehaviour
 {
-    public float rotationSpeed = 90f; // 초당 회전 각도
+    public float rotationSpeed = 90f;
 
     void Update()
     {
