@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class GiftSuccessTrigger : MonoBehaviour
 {
-    public AudioClip collectSound; // Àç»ıÇÒ È¿°úÀ½
-    public AudioSource audioSource; // ÀÎ½ºÆåÅÍ¿¡¼­ Audio Source¸¦ µå·¡±× ¾Ø µå·ÓÀ¸·Î ÇÒ´ç
+    public AudioClip collectSound; // íš¨ê³¼ìŒ
+    public AudioSource audioSource; //
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("¼º°ø »óÀÚÀÔ´Ï´Ù.");
+            Debug.Log("ì„±ê³µ ìƒìì…ë‹ˆë‹¤.");
             PlaySound();
-            Destroy(gameObject, collectSound.length); // ¼Ò¸® ±æÀÌ¸¸Å­ µô·¹ÀÌ ÈÄ »èÁ¦
+            Destroy(gameObject, collectSound.length); // ì†Œë¦¬ ê¸¸ì´ë§Œí¼ ë”œë ˆì´ í›„ ì‚­ì œ
         }
     }
 
