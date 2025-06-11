@@ -3,18 +3,18 @@ using UnityEngine.Video;
 
 public class KeyDestruction : MonoBehaviour
 {
-    public VideoPlayer videoPlayer; // ÇÏÀÌ¾î¶óÅ°ÀÇ VideoPlayer ¿ÀºêÁ§Æ®¸¦ ¿©±â¿¡ ÇÒ´ç
+    public VideoPlayer videoPlayer;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Door"))
         {
-            // ¿µ»ó Àç»ı
+            // ì˜ìƒ ì¬ìƒ
             if (videoPlayer != null)
             {
                 videoPlayer.Play();
             }
-            Destroy(gameObject); // Å° »èÁ¦
+            Destroy(gameObject); // í‚¤ ì‚­ì œ
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovingHeart : MonoBehaviour
 {
-    public bool isLeft = true; // ÁÂ/¿ì ±¸ºÐ
+    public bool isLeft = true;
     public float moveSpeed = 300f;
 
     public RectTransform rectTransform;

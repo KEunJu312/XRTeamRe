@@ -3,25 +3,23 @@ using UnityEngine.AI;
 
 public class TeleportOnCollision : MonoBehaviour
 {
-    // ÅÚ·¹Æ÷Æ® À§Ä¡¸¦ ÁöÁ¤ÇÒ º¯¼ö (¿øÇÏ´Â À§Ä¡¸¦ ¼³Á¤)
+
     public Vector3 teleportPosition = new Vector3(351f, 5f, 468f);
 
     void OnTriggerEnter(Collider other)
     {
-        // NavMeshAgent°¡ ºÙ¾îÀÖ´Â ¿ÀºêÁ§Æ®(¿¹: Rabbit, Player)¸¸ Ã³¸®
         NavMeshAgent agent = other.GetComponent<NavMeshAgent>();
         if (agent != null)
         {
-            // NavMesh À§¿¡¼­¸¸ Warp °¡´É
             bool success = agent.Warp(teleportPosition);
             if (!success)
             {
-                Debug.LogWarning($"{other.name}ÀÇ Warp ½ÇÆĞ: ÁöÁ¤ À§Ä¡°¡ NavMesh À§¿¡ ¾ø½À´Ï´Ù.");
+                Debug.LogWarning($"{other.name}ì˜ Warp ì‹¤íŒ¨: ì§€ì • ìœ„ì¹˜ê°€ NavMesh ìœ„ì— ì—†ìŠµë‹ˆë‹¤.");
             }
         }
         else
         {
-            // NavMeshAgent ¾ø´Â °æ¿ì¿£ Transform.position »ç¿ë (¿¹¿ÜÀû »óÈ²)
+            // NavMeshAgent ì—†ëŠ” ê²½ìš°ì—” Transform.position ì‚¬ìš© (ì˜ˆì™¸ì  ìƒí™©)
             other.transform.position = teleportPosition;
         }
     }

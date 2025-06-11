@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class TeleportBoxTrigger : MonoBehaviour
 {
-    public GameObject xrOrigin;               // XR Origin ÂüÁ¶
-    public Vector3 teleportLocation;          // ÀÌ ¹Ú½º¸¦ ¹âÀ¸¸é ÀÌµ¿ÇÒ À§Ä¡
+    public GameObject xrOrigin;
+    public Vector3 teleportLocation;          // ì´ë™í•  ìœ„ì¹˜
 
     private void OnTriggerEnter(Collider other)
     {
-        // ÇÃ·¹ÀÌ¾î°¡ XR OriginÀÎ °æ¿ì ¡æ ÀÌµ¿
+        // í”Œë ˆì´ì–´ê°€ XR Originì¸ ê²½ìš° â†’ ì´ë™
         if (other.gameObject == xrOrigin)
         {
             xrOrigin.transform.position = teleportLocation;
             Debug.Log($"Teleported XR Origin to {teleportLocation} by {gameObject.name}");
 
-            // ¹Ú½º Á¦°Å (Àç»ç¿ë ¹æÁö)
+            // ë°•ìŠ¤ ì œê±°
             Destroy(gameObject);
         }
     }

@@ -1,13 +1,11 @@
 using UnityEngine;
-using DialogueEditor; // DialogueEditor ³×ÀÓ½ºÆäÀÌ½º »ç¿ë
-
+using DialogueEditor;
 public class DialogueStarter : MonoBehaviour
 {
-    public NPCConversation rabbitConversation; // Inspector¿¡¼­ RabbitConversation ¿¬°á
-
+    public NPCConversation rabbitConversation;
     public void StartRabbitDialogue()
     {
-        // ´ëÈ­ ½ÃÀÛ
+        // ëŒ€í™” ì‹œìž‘
         ConversationManager.Instance.StartConversation(rabbitConversation);
     }
 }
