@@ -3,9 +3,9 @@ using UnityEngine.Video;
 
 public class PlayVideoWithTeleport : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;        // ¿µ»ó Àç»ı¿ë VideoPlayer
-    public Transform player;               // ÀÌµ¿½ÃÅ³ ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ® (XR Rig µî)
-    public Transform teleportTarget;       // ÀÌµ¿ÇÒ À§Ä¡ (ºó GameObject µî)
+    public VideoPlayer videoPlayer;
+    public Transform player;
+    public Transform teleportTarget;
 
     private bool hasPlayed = false;
 
@@ -13,17 +13,15 @@ public class PlayVideoWithTeleport : MonoBehaviour
     {
         if (other.CompareTag("Player") && !hasPlayed)
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î°¡ ¹®¿¡ ´êÀ½!"); // ·Î±× È®ÀÎ
+            Debug.Log("í”Œë ˆì´ì–´ê°€ ë¬¸ì— ë‹¿ìŒ!");
             hasPlayed = true;
 
-            // 1. ÇÃ·¹ÀÌ¾î À§Ä¡ ÀÌµ¿ (ÅÚ·¹Æ÷Æ®)
+            // 1. í”Œë ˆì´ì–´ ìœ„ì¹˜ ì´ë™ (í…”ë ˆí¬íŠ¸)
             if (player != null && teleportTarget != null)
             {
-                // XR RigÀÇ Camera Offset(¶Ç´Â XR Origin) À§Ä¡ ÀÌµ¿
                 player.position = teleportTarget.position;
-                player.rotation = teleportTarget.rotation; // ¹æÇâµµ ¸ÂÃã
+                player.rotation = teleportTarget.rotation;
 
-                // ¸¸¾à CharacterController°¡ ÀÖ´Ù¸é
                 CharacterController cc = player.GetComponent<CharacterController>();
                 if (cc != null)
                 {
@@ -34,7 +32,7 @@ public class PlayVideoWithTeleport : MonoBehaviour
                 }
             }
 
-            // 2. ¿µ»ó Àç»ı
+            // 2. ì˜ìƒ ì¬ìƒ
             if (videoPlayer != null && !videoPlayer.isPlaying)
             {
                 videoPlayer.Play();
